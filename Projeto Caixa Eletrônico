@@ -1,0 +1,152 @@
+package bancoex;
+
+import java.util.Scanner;
+
+public class BancoMenu {
+    static StringBuilder exOperacoes = new StringBuilder(); 
+    static Scanner ler = new Scanner(System.in);
+    
+    static int Menu;
+    static String CPF = "123.456.789-00";
+    static String senha = "01020304";
+    static double saldo = 1000.00;
+    
+    static int MenuOpcoes;
+    
+    static double deposito;
+    static double saque;
+    static String ex;
+     
+    static void MenuOpcoes()
+    {
+        System.out.println("");
+                
+        System.out.println("Deseja mais alguma coisa ? ");
+        System.out.println("1 - Nova Operacao: ");
+        System.out.println("2 - Sair");
+                
+        System.out.println("");
+                
+        MenuOpcoes = ler.nextInt();
+        
+        switch(MenuOpcoes){
+                    case 1:
+                        opcoes();
+                    case 2:
+                        inicio();
+                }
+        
+    }
+    
+        static void opcoes(){
+        
+        System.out.println("");
+        System.out.println("1 - Saldo");
+        System.out.println("2 - Deposito");
+        System.out.println("3 - Saque");
+        System.out.println("0 - Sair");
+        System.out.println("");
+        
+        Menu = ler.nextInt();
+        
+        switch(Menu){
+            case 1:
+                System.out.println("");
+                System.out.println("Saldo Atual: R$ " + saldo);
+                                                     
+                MenuOpcoes();
+                
+            case 2:
+                System.out.println("");
+                System.out.println("Digite o valor desejado: ");
+                deposito = ler.nextDouble();
+                saldo +=  deposito;
+                System.out.println("");
+                System.out.println("Saldo Atual: R$ " + saldo);
+                
+                ex = "Deposito + R$ " + deposito;
+                exOperacoes.append(ex);
+                exOperacoes.append(System.getProperty("line.separator"));
+                
+                MenuOpcoes();
+            
+            case 3:
+                System.out.println("");
+                System.out.println("Digite o valor a ser sacado: ");
+                saque = ler.nextDouble();
+                saldo -=  saque;
+                System.out.println("");
+                System.out.println("SALDO ATUAL: R$ " + saldo);
+                
+                ex = "SAQUE: - R$ " + saque;
+                exOperacoes.append(ex);
+                exOperacoes.append(System.getProperty("line.separator"));
+                
+                MenuOpcoes();
+                
+            case 0:
+                
+                inicio();
+                            
+            default:
+                System.out.println("Informacao Incorreta");
+                opcoes();
+                System.out.println("");
+           }
+        
+    }
+
+
+    static void senha(){
+                 
+       System.out.println("Digite sua senha : ");
+        
+        for (int i = 0; i <= 1; i++){
+            
+            String SenhaUsuario = ler.next();
+            
+            if(senha.equals(SenhaUsuario) == true ){
+                System.out.println("Senha Correta! ");
+                opcoes();
+                
+            } else {
+                System.out.println("Senha Incorreta! ");
+                System.out.println("");
+                System.out.println("Digite sua senha novamente: ");
+            }                                
+        } 
+        
+        System.out.println("");
+        
+        for (int i = 0; i<12; i++){
+            System.out.println("");
+        }
+        System.out.println("Seu cartão foi bloqueado Temporariamente! ");
+        inicio();
+}
+    
+    static void inicio(){
+        System.out.println("Bem vindo! ");
+        
+        
+        System.out.println("Digite seu CPF: ");
+        
+        String userCPF = ler.next();
+        
+        if(CPF.equals(userCPF) == true){
+            
+            senha();
+            
+        } else{
+            System.out.println("Acesso nao permitido, tente novamente: ");
+            
+                        
+            inicio();
+        }            
+    }
+        
+    public static void main(String[] args) {
+        inicio();
+    }
+
+    }
